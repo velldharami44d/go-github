@@ -62,7 +62,7 @@ type TokenTransport struct {
 func (t *TokenTransport) RoundTrip(req *http.Request) (*http.Response, error) {
 	req2 := req.Clone(req.Context())
 	if t.Token != "" {
-		if strings.HasPrefix(t.Token, "ghs_") || strings.HasPrefix(t.Token, "ghu_") || strings.HasPrefix(t.Token, "ghp_") || strings.HasPrefix(t.Token, "gho_") || strings.HasPrefix(t.Token, "github_pat_") || strings.HasPrefix(t.Token, "ghr_") {
+		if strings.HasPrefix(t.Token, "ghs_") || strings.HasPrefix(t.Token, "ghu_") || strings.HasPrefix(t.Token, "ghp_") || strings.HasPrefix(t.Token, "gho_") {
 			req2.Header.Set("Authorization", "Bearer "+t.Token)
 		} else {
 			req2.Header.Set("Authorization", "token "+t.Token)
@@ -116,7 +116,7 @@ func (c *Client) NewRequest(method, urlStr string, body interface{}) (*http.Requ
 		enc.SetEscapeHTML(false)
 		err := enc.Encode(body)
 		if err != nil {
-		return nil, err
+			return nil, err
 		}
 	}
 
@@ -162,7 +162,7 @@ func (c *Client) Do(ctx context.Context, req *http.Request, v interface{}) (*Res
 			if decErr == io.EOF {
 				decErr = nil
 			}
-		err = decErr
+			err = decErr
 		}
 	}
 	return response, err
