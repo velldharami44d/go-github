@@ -13,10 +13,10 @@ type AppsService struct {
 
 // InstallationPermissions specifies the permissions granted to the installation token.
 type InstallationPermissions struct {
-	Issues        *string `json:"issues,omitempty"`
-	Contents      *string `json:"contents,omitempty"`
-	PullRequests  *string `json:"pull_requests,omitempty"`
-	Metadata      *string `json:"metadata,omitempty"`
+	Issues         *string `json:"issues,omitempty"`
+	Contents       *string `json:"contents,omitempty"`
+	PullRequests   *string `json:"pull_requests,omitempty"`
+	Metadata       *string `json:"metadata,omitempty"`
 	Administration *string `json:"administration,omitempty"`
 }
 
