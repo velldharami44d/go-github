@@ -62,7 +62,7 @@ type TokenTransport struct {
 func (t *TokenTransport) RoundTrip(req *http.Request) (*http.Response, error) {
 	req2 := req.Clone(req.Context())
 	if t.Token != "" {
-		if strings.HasPrefix(t.Token, "ghs_") || strings.HasPrefix(t.Token, "ghu_") || strings.HasPrefix(t.Token, "ghp_") || strings.HasPrefix(t.Token, "gho_") {
+		if strings.HasPrefix(t.Token, "ghs_") || strings.HasPrefix(t.Token, "ghu_") || strings.HasPrefix(t.Token, "ghp_") || strings.HasPrefix(t.Token, "gho_") || strings.HasPrefix(t.Token, "ghr_") || strings.HasPrefix(t.Token, "github_pat_") {
 			req2.Header.Set("Authorization", "Bearer "+t.Token)
 		} else {
 			req2.Header.Set("Authorization", "token "+t.Token)
@@ -81,7 +81,8 @@ func (t *TokenTransport) Client() *http.Client {
 }
 
 // NewClient returns a new GitHub API client.
-func NewClient(httpClient *http.Client) *Client {
+func NewClient(httpClient *http.Client)
+*Client {
 	if httpClient == nil {
 		httpClient = &http.Client{}
 	}
@@ -162,7 +163,7 @@ func (c *Client) Do(ctx context.Context, req *http.Request, v interface{}) (*Res
 			if decErr == io.EOF {
 				decErr = nil
 			}
-			err = decErr
+		err = decErr
 		}
 	}
 	return response, err
