@@ -11,8 +11,9 @@ import (
 	"time"
 )
 
-func TestValidateInstallationToken(t *testing.T) {
-	tests := []struct {
+func TestValidateInstallationToken(t *testing.T)
+
+tests := []struct {
 		name    string
 		token   string
 		wantErr bool
@@ -144,6 +145,67 @@ func TestTokenTransport_StatelessTokenAuthorizationHeader(t *testing.T) {
 	}
 	if user["login"] != "octocat" {
 		t.Errorf("Expected login 'octocat', got %v", user["login"])
+	}
+}
+
+func TestTokenTransport_DifferentTokenTypes(t *testing.T) {
+	tests := []struct {
+		name         string
+		token        string
+		expectedAuth string
+	}{
+		{
+			name:         "ghs_ token",
+			token:        "ghs_abc123",
+			expectedAuth: "Bearer ghs_abc123",
+		},
+		{
+			name:         "github_pat_ token",
+			token:        "github_pat_11AAAAAA_longFineGrainedPATstring12345",
+			expectedAuth: "Bearer github_pat_11AAAAAA_longFineGrainedPATstring12345",
+		},
+		{
+			name:         "ghp_ token",
+			token:        "ghp_1234567890abcdef",
+			expectedAuth: "Bearer ghp_1234567890abcdef",
+		},
+		{
+			name:         "legacy personal token without prefix",
+			token:        "40charactertokenhexstring0123456789abcdef",
+			expectedAuth: "token 40charactertokenhexstring0123456789abcdef",
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			mux := http.NewServeMux()
+			mux.HandleFunc("/test", func(w http.ResponseWriter, r *http.Request) {
+				auth := r.Header.Get("Authorization")
+				if auth != tt.expectedAuth {
+					http.Error(w, fmt.Sprintf("expected %q, got %q", tt.expectedAuth, auth), http.StatusUnauthorized)
+					return
+				}
+				w.WriteHeader(http.StatusOK)
+			})
+
+			server := httptest.NewServer(mux)
+			defer server.Close()
+
+			client := NewTokenClient(context.Background(), tt.token)
+			client.BaseURL, _ = client.BaseURL.Parse(server.URL + "/")
+
+			req, err := client.NewRequest("GET", "test", nil)
+			if err != nil {
+				t.Fatalf("NewRequest failed: %v", err)
+			}
+			resp, err := client.Do(context.Background(), req, nil)
+			if err != nil {
+				t.Fatalf("Do failed: %v", err)
+			}
+			if resp.StatusCode != http.StatusOK {
+				t.Errorf("Expected status 200, got %d", resp.StatusCode)
+			}
+		})
 	}
 }
 
