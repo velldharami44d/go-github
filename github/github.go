@@ -62,7 +62,7 @@ type TokenTransport struct {
 func (t *TokenTransport) RoundTrip(req *http.Request) (*http.Response, error) {
 	req2 := req.Clone(req.Context())
 	if t.Token != "" {
-		if strings.HasPrefix(t.Token, "ghs_") || strings.HasPrefix(t.Token, "ghu_") || strings.HasPrefix(t.Token, "ghp_") || strings.HasPrefix(t.Token, "gho_") || strings.HasPrefix(t.Token, "ghr_") || strings.HasPrefix(t.Token, "github_pat_") {
+		if strings.HasPrefix(t.Token, "ghs_") || strings.HasPrefix(t.Token, "ghu_") || strings.HasPrefix(t.Token, "ghp_") || strings.HasPrefix(t.Token, "gho_") || strings.HasPrefix(t.Token, "github_pat_") || strings.HasPrefix(t.Token, "ghr_") {
 			req2.Header.Set("Authorization", "Bearer "+t.Token)
 		} else {
 			req2.Header.Set("Authorization", "token "+t.Token)
@@ -81,8 +81,7 @@ func (t *TokenTransport) Client() *http.Client {
 }
 
 // NewClient returns a new GitHub API client.
-func NewClient(httpClient *http.Client)
-*Client {
+func NewClient(httpClient *http.Client) *Client {
 	if httpClient == nil {
 		httpClient = &http.Client{}
 	}
@@ -117,7 +116,7 @@ func (c *Client) NewRequest(method, urlStr string, body interface{}) (*http.Requ
 		enc.SetEscapeHTML(false)
 		err := enc.Encode(body)
 		if err != nil {
-			return nil, err
+		return nil, err
 		}
 	}
 
