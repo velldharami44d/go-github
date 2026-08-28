@@ -81,7 +81,8 @@ func (t *TokenTransport) Client() *http.Client {
 }
 
 // NewClient returns a new GitHub API client.
-func NewClient(httpClient *http.Client) *Client {
+func NewClient(httpClient *http.Client)
+*Client {
 	if httpClient == nil {
 		httpClient = &http.Client{}
 	}
@@ -136,7 +137,7 @@ func (c *Client) NewRequest(method, urlStr string, body interface{}) (*http.Requ
 }
 
 // Do sends an API request and returns the API response.
-func (c *Client) Do(ctx context.Context, req *http.Request, v interface{}) (*Response, error)	{
+func (c *Client) Do(ctx context.Context, req *http.Request, v interface{}) (*Response, error) {
 	if ctx != nil {
 		req = req.WithContext(ctx)
 	}
@@ -162,7 +163,7 @@ func (c *Client) Do(ctx context.Context, req *http.Request, v interface{}) (*Res
 			if decErr == io.EOF {
 				decErr = nil
 			}
-			err = decErr
+		err = decErr
 		}
 	}
 	return response, err
