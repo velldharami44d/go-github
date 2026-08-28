@@ -115,7 +115,7 @@ func TestTokenTransport_StatelessTokenAuthorizationHeader(t *testing.T) {
 		authHeader := r.Header.Get("Authorization")
 		expectedAuth := "Bearer " + statelessToken
 		if authHeader != expectedAuth {
-			http.Error(w, fmt.Sprintf("expected auth %s, got %s", expectedAuth, authHeader), http.StatusUnauthorized)
+		http.Error(w, fmt.Sprintf("expected auth %s, got %s", expectedAuth, authHeader), http.StatusUnauthorized)
 			return
 		}
 		w.Header().Set("Content-Type", "application/json")
