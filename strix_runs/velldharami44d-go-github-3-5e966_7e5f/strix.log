@@ -1,0 +1,16 @@
+2026-08-28 12:01:04.224 INFO    velldharami44d-go-github-3-5e966_7e5f - strix.core.runner: Starting Strix scan velldharami44d-go-github-3-5e966_7e5f (image=ghcr.io/usestrix/strix-sandbox:1.3.0, max_turns=10, interactive=False, run_dir=/mnt/c/MikoBuild/workspaces/bounty_hunter_editable/velldharami44d__go-github__3__5e966bb279__issue_3__1b861df877/strix_runs/velldharami44d-go-github-3-5e966_7e5f)
+2026-08-28 12:01:04.225 INFO    velldharami44d-go-github-3-5e966_7e5f - strix.core.runner: LLM model resolved: ollama/qwen3:8b
+2026-08-28 12:01:04.227 INFO    velldharami44d-go-github-3-5e966_7e5f - strix.core.runner: Bringing up sandbox session for scan velldharami44d-go-github-3-5e966_7e5f
+2026-08-28 12:01:04.228 DEBUG   velldharami44d-go-github-3-5e966_7e5f - strix.runtime.backends: Selected sandbox backend: docker
+2026-08-28 12:01:04.234 INFO    velldharami44d-go-github-3-5e966_7e5f - strix.runtime.session_manager: Creating sandbox session for scan velldharami44d-go-github-3-5e966_7e5f (backend=docker, image=ghcr.io/usestrix/strix-sandbox:1.3.0)
+2026-08-28 12:01:04.397 DEBUG   velldharami44d-go-github-3-5e966_7e5f - strix.runtime.docker_client: Creating sandbox container: image=ghcr.io/usestrix/strix-sandbox:1.3.0 caps=['NET_ADMIN', 'NET_RAW'] exposed_ports=[48080]
+2026-08-28 12:01:04.554 INFO    velldharami44d-go-github-3-5e966_7e5f - strix.runtime.docker_client: Sandbox container created: id=65d328196557 image=ghcr.io/usestrix/strix-sandbox:1.3.0
+2026-08-28 12:01:06.214 DEBUG   velldharami44d-go-github-3-5e966_7e5f - strix.runtime.session_manager: cleanup(velldharami44d-go-github-3-5e966_7e5f): no cached session
+2026-08-28 12:01:09.680 DEBUG   - - strix.telemetry.posthog: posthog event sent: error
+2026-08-28 12:01:10.387 DEBUG   - - strix.telemetry.scarf: scarf event sent: error
+2026-08-28 12:01:10.394 INFO    - - strix.report.sarif: Wrote SARIF 2.1.0 report: /mnt/c/MikoBuild/workspaces/bounty_hunter_editable/velldharami44d__go-github__3__5e966bb279__issue_3__1b861df877/strix_runs/velldharami44d-go-github-3-5e966_7e5f/findings.sarif (0 results)
+2026-08-28 12:01:10.398 INFO    - - strix.report.state: Essential scan data saved to: /mnt/c/MikoBuild/workspaces/bounty_hunter_editable/velldharami44d__go-github__3__5e966bb279__issue_3__1b861df877/strix_runs/velldharami44d-go-github-3-5e966_7e5f
+2026-08-28 12:01:12.360 DEBUG   - - strix.telemetry.posthog: posthog event sent: scan_ended
+2026-08-28 12:01:13.100 DEBUG   - - strix.telemetry.scarf: scarf event sent: scan_ended
+2026-08-28 12:01:13.115 INFO    - - strix.report.sarif: Wrote SARIF 2.1.0 report: /mnt/c/MikoBuild/workspaces/bounty_hunter_editable/velldharami44d__go-github__3__5e966bb279__issue_3__1b861df877/strix_runs/velldharami44d-go-github-3-5e966_7e5f/findings.sarif (0 results)
+2026-08-28 12:01:13.121 INFO    - - strix.report.state: Essential scan data saved to: /mnt/c/MikoBuild/workspaces/bounty_hunter_editable/velldharami44d__go-github__3__5e966bb279__issue_3__1b861df877/strix_runs/velldharami44d-go-github-3-5e966_7e5f
