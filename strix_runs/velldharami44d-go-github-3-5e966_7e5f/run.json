@@ -1,0 +1,56 @@
+{
+  "run_id": "velldharami44d-go-github-3-5e966_7e5f",
+  "run_name": "velldharami44d-go-github-3-5e966_7e5f",
+  "start_time": "2026-08-28T05:01:00.700426+00:00",
+  "end_time": "2026-08-28T05:01:10.387905+00:00",
+  "status": "failed",
+  "auth_mode": "api_key",
+  "targets_info": [
+    {
+      "type": "local_code",
+      "details": {
+        "target_path": "/mnt/c/MikoBuild/workspaces/bounty_hunter_editable/velldharami44d__go-github__3__5e966bb279__issue_3__1b861df877",
+        "workspace_subdir": "velldharami44d__go-github__3__5e966bb279__issue_3__1b861df877"
+      },
+      "original": "/mnt/c/MikoBuild/workspaces/bounty_hunter_editable/velldharami44d__go-github__3__5e966bb279__issue_3__1b861df877"
+    }
+  ],
+  "llm_usage": {
+    "requests": 0,
+    "input_tokens": 0,
+    "input_tokens_details": [
+      {
+        "cache_write_tokens": 0,
+        "cached_tokens": 0
+      }
+    ],
+    "output_tokens": 0,
+    "output_tokens_details": [
+      {
+        "reasoning_tokens": 0
+      }
+    ],
+    "total_tokens": 0,
+    "request_usage_entries": [],
+    "cost": 0.0,
+    "agents": []
+  },
+  "scan_mode": "quick",
+  "instruction": "",
+  "user_instruction": null,
+  "non_interactive": true,
+  "local_sources": [
+    {
+      "source_path": "/mnt/c/MikoBuild/workspaces/bounty_hunter_editable/velldharami44d__go-github__3__5e966bb279__issue_3__1b861df877",
+      "workspace_subdir": "velldharami44d__go-github__3__5e966bb279__issue_3__1b861df877",
+      "protect_metadata": true
+    }
+  ],
+  "workspace_mount": null,
+  "diff_scope": {
+    "active": false,
+    "mode": "auto"
+  },
+  "scope_mode": "auto",
+  "diff_base": null
+}
