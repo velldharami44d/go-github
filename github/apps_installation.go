@@ -3,7 +3,6 @@ package github
 import (
 	"context"
 	"fmt"
-	"regexp"
 )
 
 // AppsService provides access to installation and App-related functions in the GitHub API.
@@ -48,18 +47,14 @@ type InstallationTokenOptions struct {
 	Permissions   *InstallationPermissions `json:"permissions,omitempty"`
 }
 
-// installationTokenRegex matches both legacy fixed-length and new variable-length stateless tokens.
-// Stateless tokens start with `ghs_` and contain URL-safe base64 characters (including `-`, `_`, and `.`).
-var installationTokenRegex = regexp.MustCompile(`^ghs_[A-Za-z0-9_.-]+$`)
-
-// ValidateInstallationToken checks if the given token string conforms to valid GitHub App installation token format.
-// It supports both legacy stateful tokens (e.g. ghs_36chars) and modern variable-length stateless tokens.
+// ValidateInstallationToken performs a minimal sanity check on an installation
+// token. Tokens are treated as opaque values: no format, prefix, length, or
+// character-set validation is applied so that legacy stateful tokens, current
+// variable-length stateless tokens, and any future token schema are all
+// accepted verbatim.
 func ValidateInstallationToken(token string) error {
 	if token == "" {
 		return fmt.Errorf("installation token cannot be empty")
-	}
-	if !installationTokenRegex.MatchString(token) {
-		return fmt.Errorf("invalid installation token format: token must start with 'ghs_' and contain only URL-safe characters")
 	}
 	return nil
 }
@@ -78,6 +73,9 @@ func (s *AppsService) CreateInstallationToken(ctx context.Context, installationI
 		return nil, resp, err
 	}
 
+	// The token returned by the API is surfaced verbatim. Token formats evolve
+	// over time (e.g. variable-length stateless tokens), so the client must not
+	// reject tokens based on their shape.
 	if token.Token != nil {
 		if err := ValidateInstallationToken(*token.Token); err != nil {
 			return nil, resp, fmt.Errorf("received invalid installation token: %w", err)

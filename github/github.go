@@ -59,14 +59,14 @@ type TokenTransport struct {
 }
 
 // RoundTrip executes a single HTTP transaction, adding the Authorization header.
+// The token is treated as an opaque value and passed through verbatim using the
+// Bearer scheme, which GitHub accepts for all current token types (installation
+// tokens, user-to-server tokens, OAuth tokens, fine-grained and legacy PATs),
+// including variable-length stateless installation tokens and future formats.
 func (t *TokenTransport) RoundTrip(req *http.Request) (*http.Response, error) {
 	req2 := req.Clone(req.Context())
 	if t.Token != "" {
-		if strings.HasPrefix(t.Token, "ghs_") || strings.HasPrefix(t.Token, "ghu_") || strings.HasPrefix(t.Token, "ghp_") || strings.HasPrefix(t.Token, "gho_") {
-			req2.Header.Set("Authorization", "Bearer "+t.Token)
-		} else {
-			req2.Header.Set("Authorization", "token "+t.Token)
-		}
+		req2.Header.Set("Authorization", "Bearer "+t.Token)
 	}
 	transport := t.Transport
 	if transport == nil {
